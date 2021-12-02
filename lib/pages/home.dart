@@ -72,6 +72,14 @@ class _HomeState extends State<Home> {
     _currentScale = 1.0;
   }
 
+  void _setScaleSmall() {
+    setState(() => _currentScale = 0.5);
+  }
+
+  void _setScaleBig() {
+    setState(() => _currentScale = 16.0);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -98,12 +106,42 @@ class _HomeState extends State<Home> {
           // _transformScaleAndTranslate(),
           _transformMatrix4(),
           _positionedStatusBar(context),
+          _positionedInkWellAndInkResponse(context),
         ],
       ),
       onScaleStart: _onScaleStart,
       onScaleUpdate: _onScaleUpdate,
       onDoubleTap: _onDoubleTap,
       onLongPress: _onLongPress,
+    );
+  }
+
+  Positioned _positionedInkWellAndInkResponse(BuildContext context) {
+    return Positioned(
+      top: 50.0,
+      width: MediaQuery.of(context).size.width,
+      child: Container(
+        color: Colors.white54,
+        height: 56.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              child: Container(
+                height: 48.0,
+                width: 128.0,
+                color: Colors.black12,
+                child: const Icon(Icons.touch_app, size: 32.0),
+              ),
+              splashColor: Colors.lightGreenAccent,
+              highlightColor: Colors.lightBlueAccent,
+              onTap: _setScaleSmall,
+              onDoubleTap: _setScaleBig,
+              onLongPress: _onLongPress,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
