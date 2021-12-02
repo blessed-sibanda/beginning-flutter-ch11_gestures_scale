@@ -81,6 +81,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Gestures & Scale'),
+      ),
       body: SafeArea(
         child: _buildBody(context),
       ),
